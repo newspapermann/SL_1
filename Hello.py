@@ -5,15 +5,48 @@
 
 import streamlit as st
 from openai import OpenAI
+import hmac
 
-with st.sidebar:
-    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
-    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+def check_password():
+    """Returns `True` if the user had the correct password."""
+
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Don't store the password.
+        else:
+            st.session_state["password_correct"] = False
+
+    # Return True if the password is validated.
+    if st.session_state.get("password_correct", False):
+        return True
+
+    # Show input for password.
+    st.text_input(
+        "Password", type="password", on_change=password_entered, key="password"
+    )
+    if "password_correct" in st.session_state:
+        st.error("😕 Password incorrect")
+    return False
+
+
+if not check_password():
+    st.stop()  # Do not continue if check_password is not True.
+
+# Main Streamlit app starts here
+
+#with st.sidebar:
+#    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+#    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
     
 #st.title("ChatGPT-like clone")
 
+# Get OpenAI API key from Input
+    #client = OpenAI(api_key=openai_api_key)
+    
 # Set OpenAI API key from Streamlit secrets
-#client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Set a default model
 if "openai_model" not in st.session_state:
@@ -30,12 +63,12 @@ for message in st.session_state.messages:
 
 # Accept user input
 if prompt := st.chat_input("What is up?"):
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.")
-        st.stop()
+    #if not openai_api_key:
+    #    st.info("Please add your OpenAI API key to continue.")
+    #    st.stop()
     
     # Get OpenAI API key from Input
-    client = OpenAI(api_key=openai_api_key)
+    #client = OpenAI(api_key=openai_api_key)
     
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
