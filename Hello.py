@@ -71,8 +71,13 @@ def main():
         st.stop()  # Do not continue if check_password is not True.
     
     #st.title("AI Web Search Assistant")
-    st.sidebar.subheader("Prompt engineering tips")
-    st.sidebar.caption("By adjusting the Agent class setting input parameters: 'description', 'task', 'instructions' and 'guidelines' for better results.")
+    with st.sidebar:
+        st.title("AI + Google Assistant")
+        st.text("")
+        st.text("")
+        st.text("Prompt engineering tips")
+        st.caption("By adjusting the Agent class setting input parameters: 'description', 'task', 'instructions' and 'guidelines' for better results.")
+    
     # Initialize agent in session state
     if 'agent' not in st.session_state:
         st.session_state.agent = create_agent()
