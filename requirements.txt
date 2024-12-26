@@ -1,2 +1,5 @@
 openai
 streamlit
+phidata
+googlesearch-python
+pycountry
