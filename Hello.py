@@ -47,7 +47,7 @@ def create_agent():
             api_key=st.secrets["OPENAI_API_KEY"],
             temperature=0.7
         ),
-        tools=[GoogleSearch(fixed_max_results=8).google_search(max_results=8)],
+        tools=[GoogleSearch()],
         show_tool_calls=True,
         markdown=True,
         instructions=[
