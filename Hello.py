@@ -38,10 +38,32 @@ def check_password():
 ################################################################ Main Streamlit app starts here
 
 def create_agent():
+    #Prompt Engineering tweaks: By adjusting the Agent class setting input parameters: 'description', 'task', 'instructions' and 'guidelines' for better results.
     return Agent(
         name="Web Research Assistant",
-        description="I am an AI research assistant that combines web search results with analytical insights.",
-        task="Research topics and provide both factual summaries and analytical insights in an integrated response.",
+        description="I am an expert research analyst specializing in synthesizing information from multiple web sources, identifying patterns, and providing actionable insights with proper citations.",
+        task="Conduct comprehensive web research, critically evaluate sources, identify key trends and patterns, and deliver structured analysis with specific examples and citations.",
+        instructions=[
+            "Evaluate source credibility before including information",
+            "Prioritize recent sources (within last 2 years when applicable)",
+            "Compare and contrast different viewpoints on the topic",
+            "Support claims with specific examples and data",
+            "Identify potential biases or limitations in sources",
+            "Draw connections between seemingly unrelated findings",
+            "Conclude with practical implications or recommendations"
+        ],
+        guidelines=[
+            "Structure: '📊 Key Findings' -> '💡 Analysis' -> '🎯 Implications'",
+            "To present the information, use only one level of bullet points and avoid sub-bullets",
+            "Include relevant statistics and metrics when available",
+            "Break down complex topics into digestible sections",
+            "Use comparative tables for contrasting viewpoints",
+            "Bold key terms and findings for emphasis",
+            "Use Markdown syntax for formatting and styling",
+            "Proofread and revise content for clarity and coherence",
+            "Be concise and avoid unnecessary jargon or technical terms",
+            "Cite all sources using inline citations"
+        ],
         model=OpenAIChat(
             id='gpt-4o-mini',
             api_key=st.secrets["OPENAI_API_KEY"],
@@ -50,20 +72,6 @@ def create_agent():
         tools=[GoogleSearch()],
         show_tool_calls=True,
         markdown=True,
-        instructions=[
-            "Blend web sources and AI analysis seamlessly",
-            "Start with key findings from sources",
-            "Follow with analytical insights and implications",
-            "Make connections between different sources",
-            "Highlight emerging trends and patterns"
-        ],
-        guidelines=[
-            "Structure: Begin with '🔍 Key Findings:', followed by '💡 Analysis:'",
-            "Keep paragraphs concise and focused",
-            "Use bullet points for main ideas",
-            "Always cite sources inline",
-            "Maintain a conversational yet professional tone"
-        ]
     )
 
 def main():
@@ -71,12 +79,12 @@ def main():
         st.stop()  # Do not continue if check_password is not True.
     
     #st.title("AI Web Search Assistant")
-    with st.sidebar:
-        st.title("AI + Google Assistant")
-        st.text("")
-        st.text("")
-        st.text("Prompt engineering tips")
-        st.caption("By adjusting the Agent class setting input parameters: 'description', 'task', 'instructions' and 'guidelines' for better results.")
+    #with st.sidebar:
+    #    st.title("AI + Google Assistant")
+    #    st.text("")
+    #    st.text("")
+    #    st.text("Prompt engineering tips")
+    #    st.caption("By adjusting the Agent class setting input parameters: 'description', 'task', 'instructions' and 'guidelines' for better results.")
     
     # Initialize agent in session state
     if 'agent' not in st.session_state:
