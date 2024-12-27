@@ -1,5 +1,3 @@
-
-
 #https://docs.streamlit.io/develop/tutorials/llms
 #https://platform.openai.com/settings/organization/usage
 #https://console.groq.com/playground
@@ -7,6 +5,13 @@
 
 #conda activate streamlitenv
 #streamlit run Hello.py
+
+#Medical Search: https://github.com/phidatahq/phidata/blob/main/phi/tools/pubmed.py
+#Text to Speech: https://github.com/phidatahq/phidata/blob/main/phi/tools/eleven_labs_tools.py
+#Web Crawling: https://github.com/phidatahq/phidata/blob/main/phi/tools/crawl4ai_tools.py
+#Image Generation: https://github.com/phidatahq/phidata/blob/main/phi/tools/dalle.py
+#Financial Data: https://github.com/phidatahq/phidata/blob/main/phi/tools/openbb_tools.py | https://github.com/phidatahq/phidata/blob/main/phi/tools/yfinance.py
+#Youtube Transcript: https://github.com/phidatahq/phidata/blob/main/phi/tools/youtube_tools.py
 
 import streamlit as st
 from phi.agent import Agent
