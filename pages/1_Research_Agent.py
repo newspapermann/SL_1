@@ -1,5 +1,3 @@
-
-
 #https://docs.streamlit.io/develop/tutorials/llms
 #https://platform.openai.com/settings/organization/usage
 #https://console.groq.com/playground
@@ -14,12 +12,6 @@ from phi.model.openai import OpenAIChat
 from phi.tools.googlesearch import GoogleSearch
 from phi.tools.tavily import TavilyTools
 import hmac
-
-st.set_page_config(
-    page_title="AI Apps",
-    page_icon=":orange_heart:",
-    layout="wide",
-)
 
 def check_password():
     """Returns `True` if the user had the correct password."""
