@@ -65,7 +65,7 @@ def create_agent():
             "Cite all sources using inline citations"
         ],
         model=OpenAIChat(
-            id='gpt-4o-mini',
+            id='gpt-4o-mini-2024-07-18',
             api_key=st.secrets["OPENAI_API_KEY"],
             temperature=0.7
         ),
