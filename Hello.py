@@ -10,6 +10,7 @@ import streamlit as st
 from phi.agent import Agent
 from phi.model.openai import OpenAIChat
 from phi.tools.googlesearch import GoogleSearch
+from phi.tools.tavily import TavilyTools
 import hmac
 
 def check_password():
@@ -65,11 +66,11 @@ def create_agent():
             "Cite all sources using inline citations"
         ],
         model=OpenAIChat(
-            id='gpt-4o-mini-2024-07-18',
+            id='gpt-4o-mini',
             api_key=st.secrets["OPENAI_API_KEY"],
             temperature=0.7
         ),
-        tools=[GoogleSearch()],
+        tools=[GoogleSearch(), TavilyTools(api_key=st.secrets["TAVILY_API_KEY"])],
         show_tool_calls=True,
         markdown=True,
     )

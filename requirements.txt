@@ -3,3 +3,4 @@ streamlit
 phidata
 googlesearch-python
 pycountry
+tavily-python
